@@ -1,0 +1,167 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+:root{
+  --bg:#0b0c10; --panel:#0f1117; --panel-2:#121523; --muted:#a6adbb; --text:#e6e8ee;
+  --accent:#3b82f6; --border:#202331; --chip:#1b2030;
+  --shadow:0 12px 30px rgba(0,0,0,.35); --radius:14px;
+}
+body{ background:var(--bg); color:var(--text); font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+
+#app{ display:grid; grid-template-rows:auto 1fr auto; height:100vh; width:100vw; }
+
+/* Header */
+.app-header{
+  position:sticky; top:0; z-index:10;
+  background:rgba(15,17,23,.9); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.brand{ display:flex; align-items:center; gap:12px; padding:14px 22px; max-width:1200px; margin:0 auto; }
+.brand-title{ font-weight:650; letter-spacing:.2px; font-size:16px; }
+
+/* Chat area */
+.chat{ display:grid; grid-template-rows:1fr; }
+.chat-window{
+  width:100%; max-width:1100px;
+  margin:0 auto; padding:20px 22px 120px; overflow:auto;
+}
+.chat-window img{ max-width:100%; height:auto; }
+
+/* Bubbles */
+.message{ max-width:60ch; padding:12px 14px; border-radius:16px; margin:12px 0; box-shadow:var(--shadow); }
+.user-message{ background:#1f2937; color:#fff; margin-left:auto; border:1px solid #2a3345; }
+.bot-message{ background:var(--panel); color:var(--text); margin-right:auto; border:1px solid var(--border); }
+
+/* Stories block */
+.stories{
+  background:var(--panel-2); border:1px solid var(--border); border-radius:var(--radius);
+  padding:16px; margin:10px 0 22px; box-shadow:var(--shadow);
+}
+.stories-header{ font-weight:600; padding:6px 4px 14px; color:var(--text); }
+
+/* Story card: two-column layout on desktop */
+.story{
+  display:grid; grid-template-columns:220px 1fr; gap:18px;
+  background:var(--panel); border:1px solid var(--border); border-radius:12px;
+  padding:16px; margin:14px 0; transition:transform .12s ease, box-shadow .12s ease;
+}
+.story:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,.35); }
+@media (max-width: 820px){ .story{ grid-template-columns:1fr; } }
+
+/* Left column */
+.story-left{ display:grid; grid-template-rows:auto auto auto 1fr; gap:12px; }
+.story-logo{
+  width:64px; height:64px; border-radius:10px; background:#0e1016; border:1px solid var(--border);
+  display:grid; place-items:center; overflow:hidden;
+}
+.story-logo img{ width:100%; height:100%; object-fit:contain; }
+.story-solution{ font-size:13px; color:var(--muted); }
+
+/* Badges (Enterprise, Reference) */
+.badges{ display:flex; flex-wrap:wrap; gap:6px; }
+.badge{
+  font-size:12px; padding:4px 8px; border-radius:999px;
+  background:var(--chip); color:var(--text); border:1px solid #273149;
+}
+
+/* Country / industry tag bubbles — FIXED */
+.tags-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;             /* spacing between bubbles */
+}
+.tag-bubble{
+  background:#1e293b;
+  color:#fff;
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:9999px;
+  white-space:nowrap;  /* no awkward wrapping inside a bubble */
+  display:inline-flex;
+  align-items:center;
+  border:1px solid #2a3345;
+}
+
+/* Right column */
+.story-right{ display:grid; grid-template-rows:auto auto auto 1fr auto; gap:10px; }
+
+/* Title / org */
+.story-title{ font-weight:650; color:var(--text); text-decoration:none; line-height:1.25; font-size:16px; }
+.story-title:hover{ text-decoration:underline; }
+
+/* Person row */
+.person{ display:flex; align-items:center; gap:10px; }
+.person-avatar{
+  width:36px; height:36px; border-radius:50%; overflow:hidden;
+  background:#0e1016; border:1px solid var(--border);
+}
+.person-avatar img{ width:100%; height:100%; object-fit:cover; }
+.person-block{ display:grid; gap:2px; }
+.person-name{ font-weight:550; }
+.person-meta{ color:var(--muted); font-size:13px; }
+.person-link a{ color:var(--accent); text-decoration:none; font-size:13px; }
+.person-link a:hover{ text-decoration:underline; }
+
+/* Details: 2-column on wide */
+.details-grid{ display:grid; gap:8px 24px; }
+@media (min-width: 900px){ .details-grid{ grid-template-columns:1fr 1fr; } }
+.detail-label{ color:#b7becc; font-weight:500; font-size:13px; margin-bottom:2px; }
+.detail-block{ color:#cbd2dc; }
+
+/* Quote */
+.quote{ font-style:italic; color:#b6bcc9; }
+
+/* CTA row */
+.card-actions{ display:flex; justify-content:flex-end; }
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none;
+  border:1px solid #2b5fd6; background:var(--accent); color:#fff; font-weight:600; cursor:pointer;
+}
+.btn:hover{ filter:brightness(1.05); }
+
+/* Composer */
+.composer{
+  position:sticky; bottom:0;
+  background:linear-gradient(0deg, rgba(15,17,23,1), rgba(15,17,23,.85) 60%, transparent);
+  border-top:1px solid var(--border);
+}
+.composer-form{
+  width:100%; max-width:1100px; margin:0 auto;
+  display:grid; grid-template-columns:1fr auto; gap:10px; padding:12px 16px 16px;
+}
+.composer-input{
+  width:100%; padding:14px 16px; border-radius:12px; border:1px solid var(--border);
+  background:#0f1117; color:var(--text);
+}
+.composer-input::placeholder{ color:#5d667a; }
+
+/* Scrollbar */
+.chat-window::-webkit-scrollbar{ width:10px; }
+.chat-window::-webkit-scrollbar-thumb{ background:#1c2130; border-radius:10px; border:2px solid #0b0c10; }
+
+/* --- Fix pill bubbles stretching --- */
+.story-left{
+  /* don't force the last row to fill the column height */
+  grid-template-rows: auto auto auto auto;  /* was: auto auto auto 1fr */
+  align-items: start;                        /* keep children at the top */
+}
+
+/* make sure these rows size to content and stay at the top */
+.badges,
+.tags-container{
+  align-self: start;     /* don't stretch vertically */
+  align-items: flex-start;
+}
+
+/* keep each pill at natural height even if parent is tall */
+.badge,
+.tag-bubble{
+  align-self: flex-start;    /* override flex's default stretch */
+  line-height: 1.2;          /* crisp vertical rhythm */
+  padding: 4px 10px;         /* re-assert compact padding */
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* (optional) tighten the tags row a touch */
+.tags-container{ gap: 6px; margin-top: 6px; }
